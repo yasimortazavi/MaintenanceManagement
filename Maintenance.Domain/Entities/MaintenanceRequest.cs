@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Maintenance.Domain.Enums;
+
 
 namespace Maintenance.Domain.Entities
 {
@@ -29,6 +31,7 @@ namespace Maintenance.Domain.Entities
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         public MaintenanceRequestStatus Status { get; set; }
+    = MaintenanceRequestStatus.Submitted;
 
         public ICollection<RequestFaultType> RequestFaultTypes { get; set; }
             = new List<RequestFaultType>();
