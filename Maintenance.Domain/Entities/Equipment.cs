@@ -27,4 +27,4 @@ public class Equipment
     public ICollection<MaintenanceRequest> MaintenanceRequests
     { get; set; } = new List<MaintenanceRequest>();
 }
-}
+
