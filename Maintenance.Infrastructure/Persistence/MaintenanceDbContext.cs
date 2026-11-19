@@ -24,5 +24,15 @@ namespace Maintenance.Infrastructure.Persistence
         public DbSet<MaintenanceAttachment> MaintenanceAttachments { get; set; }
         public DbSet<TechnicianAssignment> TechnicianAssignments { get; set; }
         public DbSet<MaintenanceWorkLog> MaintenanceWorkLogs { get; set; }
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.ApplyConfigurationsFromAssembly(
+                typeof(MaintenanceDbContext).Assembly);
+        }
+
     }
 }
