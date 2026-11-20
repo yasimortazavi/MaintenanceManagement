@@ -42,6 +42,10 @@ namespace Maintenance.Infrastructure.Configurations
                 .WithMany(x => x.MaintenanceRequests)
                 .HasForeignKey(x => x.DepartmentId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Property(x => x.RequesterId)
+    .IsRequired()
+    .HasMaxLength(450);
         }
     }
 }
