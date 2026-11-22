@@ -1,0 +1,33 @@
+﻿@model List<Maintenance.Domain.Entities.Equipment>
+
+@{
+    ViewData["Title"] = "لیست تجهیزات";
+}
+
+<h2>لیست تجهیزات</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>شناسه</th>
+            <th>نام تجهیز</th>
+            <th>کد اموال</th>
+            <th>مدل</th>
+            <th>شماره سریال</th>
+            <th>وضعیت</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var equipment in Model)
+        {
+            <tr>
+                <td>@equipment.Id</td>
+                <td>@equipment.Name</td>
+                <td>@equipment.AssetCode</td>
+                <td>@equipment.Model</td>
+                <td>@equipment.SerialNumber</td>
+                <td>@(equipment.IsActive ? "فعال" : "غیرفعال")</td>
+            </tr>
+        }
+    </tbody>
+</table>
