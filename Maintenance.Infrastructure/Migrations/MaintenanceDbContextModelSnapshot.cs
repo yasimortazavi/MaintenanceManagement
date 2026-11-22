@@ -114,6 +114,56 @@ namespace Maintenance.Infrastructure.Migrations
                     b.HasIndex("DepartmentId");
 
                     b.ToTable("Equipments");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AssetCode = "EQ-001",
+                            DepartmentId = 1,
+                            IsActive = true,
+                            Name = "الکتروموتور"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AssetCode = "EQ-002",
+                            DepartmentId = 1,
+                            IsActive = true,
+                            Name = "تابلو برق"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AssetCode = "EQ-003",
+                            DepartmentId = 2,
+                            IsActive = true,
+                            Name = "پمپ صنعتی"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AssetCode = "EQ-004",
+                            DepartmentId = 2,
+                            IsActive = true,
+                            Name = "گیربکس"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            AssetCode = "EQ-005",
+                            DepartmentId = 3,
+                            IsActive = true,
+                            Name = "سنسور فشار"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            AssetCode = "EQ-006",
+                            DepartmentId = 3,
+                            IsActive = true,
+                            Name = "ترانسمیتر دما"
+                        });
                 });
 
             modelBuilder.Entity("Maintenance.Domain.Entities.FaultType", b =>
