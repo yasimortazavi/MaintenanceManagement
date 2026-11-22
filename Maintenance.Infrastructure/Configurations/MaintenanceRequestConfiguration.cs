@@ -44,8 +44,8 @@ namespace Maintenance.Infrastructure.Configurations
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.Property(x => x.RequesterId)
-    .IsRequired()
-    .HasMaxLength(450);
+                .IsRequired()
+                .HasMaxLength(450);
         }
     }
 }

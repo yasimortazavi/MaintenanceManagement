@@ -26,6 +26,32 @@ namespace Maintenance.Infrastructure.Configurations
                 .WithOne(e => e.Department)
                 .HasForeignKey(e => e.DepartmentId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+
+
+                builder.HasData(
+                new Department
+                {
+                    Id = 1,
+                    Name = "واحد برق",
+                    Code = "ELEC",
+                    IsActive = true
+                },
+                new Department
+                {
+                    Id = 2,
+                    Name = "واحد مکانیک",
+                    Code = "MECH",
+                    IsActive = true
+                },
+                new Department
+                {
+                    Id = 3,
+                    Name = "واحد ابزار دقیق",
+                    Code = "INST",
+                    IsActive = true
+                }
+            );
         }
     }
 }

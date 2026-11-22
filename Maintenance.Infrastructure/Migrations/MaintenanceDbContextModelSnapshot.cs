@@ -32,18 +32,46 @@ namespace Maintenance.Infrastructure.Migrations
 
                     b.Property<string>("Code")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Code")
+                        .IsUnique();
+
                     b.ToTable("Departments");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Code = "ELEC",
+                            IsActive = true,
+                            Name = "واحد برق"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Code = "MECH",
+                            IsActive = true,
+                            Name = "واحد مکانیک"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Code = "INST",
+                            IsActive = true,
+                            Name = "واحد ابزار دقیق"
+                        });
                 });
 
             modelBuilder.Entity("Maintenance.Domain.Entities.Equipment", b =>
@@ -188,7 +216,8 @@ namespace Maintenance.Infrastructure.Migrations
 
                     b.Property<string>("RequesterId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
