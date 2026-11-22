@@ -24,6 +24,32 @@ namespace Maintenance.Infrastructure.Configurations
 
             builder.HasIndex(x => x.Title)
                 .IsUnique();
+
+            builder.HasData(
+            new FaultType
+            {
+                Id = 1,
+                Title = "خرابی الکتریکی",
+                Description = "مشکلات مربوط به سیستم برق",
+                IsActive = true
+            },
+            new FaultType
+            {
+                Id = 2,
+                Title = "خرابی مکانیکی",
+                Description = "مشکلات مربوط به قطعات مکانیکی",
+                IsActive = true
+            },
+            new FaultType
+            {
+                Id = 3,
+                Title = "خرابی ابزار دقیق",
+                Description = "مشکلات مربوط به تجهیزات اندازه‌گیری و کنترل",
+                IsActive = true
+            }
+        );
+
+
         }
     }
 }

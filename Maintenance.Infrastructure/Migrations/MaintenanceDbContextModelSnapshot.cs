@@ -142,6 +142,29 @@ namespace Maintenance.Infrastructure.Migrations
                         .IsUnique();
 
                     b.ToTable("FaultTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "مشکلات مربوط به سیستم برق",
+                            IsActive = true,
+                            Title = "خرابی الکتریکی"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "مشکلات مربوط به قطعات مکانیکی",
+                            IsActive = true,
+                            Title = "خرابی مکانیکی"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "مشکلات مربوط به تجهیزات اندازه‌گیری و کنترل",
+                            IsActive = true,
+                            Title = "خرابی ابزار دقیق"
+                        });
                 });
 
             modelBuilder.Entity("Maintenance.Domain.Entities.MaintenanceAttachment", b =>
