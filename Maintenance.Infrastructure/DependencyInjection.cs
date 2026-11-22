@@ -1,4 +1,4 @@
-﻿using Maintenance.Application.Interfaces;
+﻿using Maintenance.Application.Interfaces.Repositories;
 using Maintenance.Infrastructure.Persistence;
 using Maintenance.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;

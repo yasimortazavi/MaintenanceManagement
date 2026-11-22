@@ -1,9 +1,10 @@
-﻿using Maintenance.Application.Interfaces;
+﻿using Maintenance.Application.Interfaces.Repositories;
+using Maintenance.Application.Interfaces.Services;
 using Maintenance.Domain.Entities;
 
 namespace Maintenance.Application.Services;
 
-public class EquipmentService
+public class EquipmentService : IEquipmentService
 {
     private readonly IEquipmentRepository _equipmentRepository;
 

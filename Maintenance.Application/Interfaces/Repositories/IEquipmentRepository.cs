@@ -1,6 +1,6 @@
 ﻿using Maintenance.Domain.Entities;
 
-namespace Maintenance.Application.Interfaces;
+namespace Maintenance.Application.Interfaces.Repositories;
 
 public interface IEquipmentRepository
 {
