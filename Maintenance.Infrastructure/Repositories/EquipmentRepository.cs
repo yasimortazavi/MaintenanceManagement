@@ -1,0 +1,22 @@
+﻿using Maintenance.Application.Interfaces;
+using Maintenance.Domain.Entities;
+using Maintenance.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
+
+namespace Maintenance.Infrastructure.Repositories;
+
+public class EquipmentRepository : IEquipmentRepository
+{
+    private readonly MaintenanceDbContext _context;
+
+    public EquipmentRepository(MaintenanceDbContext context)
+    {
+        _context = context;
+    }
+
+    public async Task<List<Equipment>> GetAllAsync()
+    {
+        return await _context.Equipments
+            .ToListAsync();
+    }
+}
