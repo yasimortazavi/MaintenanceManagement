@@ -1,4 +1,6 @@
-﻿using Maintenance.Infrastructure.Persistence;
+﻿using Maintenance.Application.Interfaces;
+using Maintenance.Infrastructure.Persistence;
+using Maintenance.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,6 +16,9 @@ public static class DependencyInjection
         services.AddDbContext<MaintenanceDbContext>(options =>
             options.UseSqlServer(
                 configuration.GetConnectionString("MaintenanceConnection")));
+
+        services.AddScoped<IEquipmentRepository, EquipmentRepository>();
+
 
         return services;
     }
