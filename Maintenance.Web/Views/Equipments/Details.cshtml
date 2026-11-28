@@ -1,0 +1,262 @@
+﻿@model Maintenance.Domain.Entities.Equipment
+
+@{
+    ViewData["Title"] = "جزئیات تجهیز";
+}
+
+<style>
+    .equipment-details {
+        direction: rtl;
+        padding: 35px;
+        min-height: 85vh;
+        background: #f3f5f9;
+        font-family: Tahoma, sans-serif;
+    }
+
+    .details-container {
+        max-width: 950px;
+        margin: auto;
+    }
+
+    .details-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+    }
+
+        .details-header h2 {
+            font-size: 23px;
+            font-weight: 700;
+            color: #172b4d;
+            margin: 0 0 9px;
+        }
+
+        .details-header p {
+            font-size: 13px;
+            color: #8994a7;
+            margin: 0;
+        }
+
+    .equipment-card {
+        background: white;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 5px 25px rgba(23, 43, 77, .06);
+    }
+
+    .equipment-banner {
+        background: linear-gradient(120deg, #172b4d, #294b78);
+        padding: 30px;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .equipment-identity {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+    }
+
+    .equipment-icon {
+        width: 58px;
+        height: 58px;
+        border-radius: 14px;
+        background: rgba(255,255,255,.13);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 27px;
+    }
+
+    .equipment-name {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 9px;
+    }
+
+    .equipment-code {
+        font-size: 12px;
+        color: #c6d4e8;
+    }
+
+    .status {
+        padding: 8px 17px;
+        border-radius: 30px;
+        font-size: 12px;
+        font-weight: bold;
+        white-space: nowrap;
+    }
+
+    .active {
+        background: #d9f7e8;
+        color: #13834d;
+    }
+
+    .inactive {
+        background: #ffe5e2;
+        color: #c3473e;
+    }
+
+    .details-content {
+        padding: 30px;
+    }
+
+    .section-title {
+        font-size: 15px;
+        font-weight: bold;
+        color: #263b59;
+        margin-bottom: 22px;
+    }
+
+    .details-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+
+    .detail-item {
+        padding: 19px;
+        border: 1px solid #edf0f5;
+        border-radius: 11px;
+        background: #fff;
+        transition: .2s;
+    }
+
+        .detail-item:hover {
+            border-color: #b8c9e3;
+            background: #fafcff;
+        }
+
+    .detail-label {
+        color: #8994a7;
+        font-size: 12px;
+        margin-bottom: 12px;
+    }
+
+    .detail-value {
+        color: #243752;
+        font-size: 14px;
+        font-weight: bold;
+        overflow-wrap: anywhere;
+    }
+
+    .details-footer {
+        border-top: 1px solid #edf0f5;
+        padding: 20px 30px;
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    .back-button {
+        background: #203d66;
+        color: white;
+        padding: 11px 22px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-size: 13px;
+        transition: .2s;
+    }
+
+        .back-button:hover {
+            background: #315887;
+            color: white;
+        }
+
+    @@media(max-width: 650px) {
+        .equipment-details {
+            padding: 15px;
+        }
+
+        .equipment-banner {
+            align-items: flex-start;
+            gap: 20px;
+            flex-direction: column;
+        }
+
+        .details-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<div class="equipment-details">
+    <div class="details-container">
+
+        <div class="details-header">
+            <div>
+                <h2>جزئیات تجهیز</h2>
+                <p>مشاهده اطلاعات و مشخصات فنی تجهیز</p>
+            </div>
+        </div>
+
+        <div class="equipment-card">
+
+            <div class="equipment-banner">
+                <div class="equipment-identity">
+                    <div class="equipment-icon">⚙</div>
+
+                    <div>
+                        <div class="equipment-name">@Model.Name</div>
+                        <div class="equipment-code">
+                            کد اموال: @Model.AssetCode
+                        </div>
+                    </div>
+                </div>
+
+                @if (Model.IsActive)
+                {
+                    <span class="status active">● فعال</span>
+                }
+                else
+                {
+                    <span class="status inactive">● غیرفعال</span>
+                }
+            </div>
+
+            <div class="details-content">
+                <div class="section-title">مشخصات تجهیز</div>
+
+                <div class="details-grid">
+
+                    <div class="detail-item">
+                        <div class="detail-label">شناسه تجهیز</div>
+                        <div class="detail-value">@Model.Id</div>
+                    </div>
+
+                    <div class="detail-item">
+                        <div class="detail-label">نام تجهیز</div>
+                        <div class="detail-value">@Model.Name</div>
+                    </div>
+
+                    <div class="detail-item">
+                        <div class="detail-label">کد اموال</div>
+                        <div class="detail-value">@Model.AssetCode</div>
+                    </div>
+
+                    <div class="detail-item">
+                        <div class="detail-label">مدل دستگاه</div>
+                        <div class="detail-value">@(Model.Model ?? "ثبت نشده")</div>
+                    </div>
+
+                    <div class="detail-item">
+                        <div class="detail-label">شماره سریال</div>
+                        <div class="detail-value">@(Model.SerialNumber ?? "ثبت نشده")</div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="details-footer">
+                <a asp-controller="Equipments"
+                   asp-action="Index"
+                   class="back-button">
+                    ← بازگشت به فهرست تجهیزات
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -19,4 +19,9 @@ public class EquipmentRepository : IEquipmentRepository
         return await _context.Equipments
             .ToListAsync();
     }
+    public async Task<Equipment?> GetByIdAsync(int id)
+    {
+        return await _context.Equipments
+            .FirstOrDefaultAsync(e => e.Id == id);
+    }
 }

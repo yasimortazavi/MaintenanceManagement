@@ -17,4 +17,10 @@ public class EquipmentService : IEquipmentService
     {
         return await _equipmentRepository.GetAllAsync();
     }
+
+    public async Task<Equipment?> GetByIdAsync(int id)
+    {
+        return await _equipmentRepository.GetByIdAsync(id);
+    }
+
 }

@@ -1,33 +1,284 @@
 ﻿@model List<Maintenance.Domain.Entities.Equipment>
 
 @{
-    ViewData["Title"] = "لیست تجهیزات";
+    ViewData["Title"] = "مدیریت تجهیزات";
 }
 
-<h2>لیست تجهیزات</h2>
+<style>
+    .equipment-page {
+        direction: rtl;
+        padding: 35px;
+        min-height: 85vh;
+        background: #f3f5f9;
+        font-family: Tahoma, sans-serif;
+    }
 
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>شناسه</th>
-            <th>نام تجهیز</th>
-            <th>کد اموال</th>
-            <th>مدل</th>
-            <th>شماره سریال</th>
-            <th>وضعیت</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var equipment in Model)
-        {
-            <tr>
-                <td>@equipment.Id</td>
-                <td>@equipment.Name</td>
-                <td>@equipment.AssetCode</td>
-                <td>@equipment.Model</td>
-                <td>@equipment.SerialNumber</td>
-                <td>@(equipment.IsActive ? "فعال" : "غیرفعال")</td>
-            </tr>
+    .page-container {
+        max-width: 1100px;
+        margin: auto;
+    }
+
+    .page-header {
+        margin-bottom: 25px;
+    }
+
+        .page-header h2 {
+            font-size: 23px;
+            font-weight: 700;
+            color: #172b4d;
+            margin: 0 0 9px;
         }
-    </tbody>
-</table>
+
+        .page-header p {
+            font-size: 13px;
+            color: #8994a7;
+            margin: 0;
+        }
+
+    .equipment-card {
+        background: white;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 5px 25px rgba(23, 43, 77, .06);
+    }
+
+    .card-banner {
+        background: linear-gradient(120deg, #172b4d, #294b78);
+        padding: 25px 30px;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .banner-title {
+        font-size: 17px;
+        font-weight: bold;
+        margin-bottom: 8px;
+    }
+
+    .banner-subtitle {
+        font-size: 12px;
+        color: #c6d4e8;
+    }
+
+    .equipment-count {
+        background: rgba(255,255,255,.13);
+        border: 1px solid rgba(255,255,255,.16);
+        border-radius: 11px;
+        padding: 12px 18px;
+        text-align: center;
+    }
+
+        .equipment-count strong {
+            display: block;
+            font-size: 23px;
+            margin-bottom: 5px;
+        }
+
+        .equipment-count span {
+            font-size: 11px;
+            color: #d5e0ef;
+        }
+
+    .table-container {
+        padding: 25px 30px;
+        overflow-x: auto;
+    }
+
+    .equipment-table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: right;
+        min-width: 650px;
+    }
+
+        .equipment-table th {
+            background: #f5f7fb;
+            color: #758197;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 16px;
+            white-space: nowrap;
+        }
+
+        .equipment-table td {
+            padding: 17px 16px;
+            border-bottom: 1px solid #edf0f5;
+            color: #34445e;
+            font-size: 13px;
+        }
+
+        .equipment-table tbody tr {
+            transition: background .2s;
+        }
+
+            .equipment-table tbody tr:hover {
+                background: #f9fbfe;
+            }
+
+            .equipment-table tbody tr:last-child td {
+                border-bottom: none;
+            }
+
+    .equipment-name {
+        color: #203d66;
+        font-weight: bold;
+    }
+
+    .equipment-id {
+        color: #8994a7;
+        font-size: 12px;
+    }
+
+    .status {
+        display: inline-block;
+        padding: 7px 14px;
+        border-radius: 30px;
+        font-size: 11px;
+        font-weight: bold;
+        white-space: nowrap;
+    }
+
+    .active {
+        background: #d9f7e8;
+        color: #13834d;
+    }
+
+    .inactive {
+        background: #ffe5e2;
+        color: #c3473e;
+    }
+
+    .details-link {
+        display: inline-block;
+        padding: 7px 13px;
+        background: #edf3fb;
+        color: #315887;
+        border-radius: 7px;
+        text-decoration: none;
+        font-size: 11px;
+        transition: .2s;
+    }
+
+        .details-link:hover {
+            background: #203d66;
+            color: white;
+        }
+
+    .empty-message {
+        text-align: center;
+        padding: 40px !important;
+        color: #8994a7 !important;
+    }
+
+    @@media(max-width: 650px) {
+        .equipment-page {
+            padding: 15px;
+        }
+
+        .card-banner {
+            align-items: flex-start;
+            gap: 20px;
+            flex-direction: column;
+        }
+
+        .table-container {
+            padding: 15px;
+        }
+    }
+</style>
+
+<div class="equipment-page">
+    <div class="page-container">
+
+        <div class="page-header">
+            <h2>مدیریت تجهیزات</h2>
+            <p>مشاهده و بررسی اطلاعات تجهیزات ثبت‌شده در سامانه نگهداری و تعمیرات</p>
+        </div>
+
+        <div class="equipment-card">
+
+            <div class="card-banner">
+                <div>
+                    <div class="banner-title">فهرست تجهیزات</div>
+                    <div class="banner-subtitle">
+                        اطلاعات پایه و وضعیت تجهیزات سازمان
+                    </div>
+                </div>
+
+                <div class="equipment-count">
+                    <strong>@(Model?.Count ?? 0)</strong>
+                    <span>تعداد کل تجهیزات</span>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table class="equipment-table">
+                    <thead>
+                        <tr>
+                            <th>شناسه</th>
+                            <th>نام تجهیز</th>
+                            <th>کد اموال</th>
+                            <th>مدل</th>
+                            <th>شماره سریال</th>
+                            <th>وضعیت</th>
+                            <th>جزئیات</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @if (Model != null && Model.Any())
+                        {
+                            @foreach (var equipment in Model)
+                            {
+                                <tr>
+                                    <td class="equipment-id">@equipment.Id</td>
+
+                                    <td class="equipment-name">
+                                        @equipment.Name
+                                    </td>
+
+                                    <td>@equipment.AssetCode</td>
+
+                                    <td>@(equipment.Model ?? "—")</td>
+
+                                    <td>@(equipment.SerialNumber ?? "—")</td>
+
+                                    <td>
+                                        @if (equipment.IsActive)
+                                        {
+                                            <span class="status active">● فعال</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="status inactive">● غیرفعال</span>
+                                        }
+                                    </td>
+
+                                    <td>
+                                        <a asp-controller="Equipments"
+                                           asp-action="Details"
+                                           asp-route-id="@equipment.Id"
+                                           class="details-link">
+                                            مشاهده جزئیات
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="7" class="empty-message">
+                                    هیچ تجهیزی برای نمایش وجود ندارد.
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>

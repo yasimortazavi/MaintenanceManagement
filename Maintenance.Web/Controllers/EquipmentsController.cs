@@ -18,5 +18,16 @@ namespace Maintenance.Web.Controllers
 
             return View(equipments);
         }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            var equipment = await _equipmentService.GetByIdAsync(id);
+
+            if (equipment == null)
+                return NotFound();
+
+            return View(equipment);
+        }
+
     }
 }
