@@ -34,5 +34,6 @@ namespace Maintenance.Infrastructure.Persistence
                 typeof(MaintenanceDbContext).Assembly);
         }
 
+
     }
 }

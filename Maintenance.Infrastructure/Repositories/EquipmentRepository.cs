@@ -19,6 +19,7 @@ public class EquipmentRepository : IEquipmentRepository
         return await _context.Equipments
             .OrderByDescending(e => e.IsActive)
              .ThenByDescending(e => e.Name)
+             .Take(10)
              .ToListAsync();
     }
     public async Task<Equipment?> GetByIdAsync(int id)
