@@ -29,6 +29,7 @@ public class EquipmentRepository : IEquipmentRepository
     {
         return await _context.Equipments
             .Where(e => e.IsActive)
+             .OrderByDescending(e => e.Name)
             .ToListAsync();
     }
 
