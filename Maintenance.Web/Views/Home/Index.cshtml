@@ -1,8 +1,303 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿
+@{
+    ViewData["Title"] = "داشبورد مدیریت تعمیرات";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<style>
+    .home-page {
+        direction: rtl;
+        min-height: 85vh;
+        padding: 40px 24px;
+        background: #f4f6fa;
+        color: #263449;
+    }
+
+    .home-container {
+        max-width: 1150px;
+        margin: 0 auto;
+    }
+
+    .welcome-section {
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(120deg, #1e304b, #304c69);
+        color: white;
+        border-radius: 20px;
+        padding: 42px;
+        margin-bottom: 30px;
+        box-shadow: 0 12px 30px rgba(30, 48, 75, .14);
+    }
+
+        .welcome-section::after {
+            content: "⚙";
+            position: absolute;
+            left: 45px;
+            top: 10px;
+            font-size: 145px;
+            color: rgba(255,255,255,.06);
+            transform: rotate(-15deg);
+        }
+
+    .welcome-content {
+        position: relative;
+        z-index: 1;
+    }
+
+    .welcome-label {
+        color: #b9d6c5;
+        font-size: 13px;
+        font-weight: 700;
+        margin-bottom: 14px;
+    }
+
+    .welcome-section h1 {
+        font-size: 29px;
+        font-weight: 800;
+        margin-bottom: 13px;
+    }
+
+    .welcome-section p {
+        color: #d5dfeb;
+        font-size: 14px;
+        line-height: 2;
+        max-width: 600px;
+        margin: 0;
+    }
+
+    .section-title {
+        font-size: 19px;
+        font-weight: 800;
+        margin-bottom: 18px;
+        color: #263449;
+    }
+
+    .quick-links {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+        gap: 18px;
+        margin-bottom: 32px;
+    }
+
+    .quick-card {
+        display: block;
+        text-decoration: none !important;
+        background: #fff;
+        border: 1px solid #e8edf4;
+        border-radius: 16px;
+        padding: 25px;
+        color: #263449 !important;
+        transition: all .25s ease;
+        box-shadow: 0 4px 15px rgba(30, 50, 80, .04);
+    }
+
+        .quick-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(30, 50, 80, .09);
+            border-color: #b8cbbd;
+        }
+
+    .quick-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 13px;
+        background: #eaf2ed;
+        color: #426b50;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 23px;
+        margin-bottom: 18px;
+    }
+
+    .quick-card h3 {
+        font-size: 16px;
+        font-weight: 800;
+        margin-bottom: 9px;
+    }
+
+    .quick-card p {
+        font-size: 13px;
+        color: #778398;
+        line-height: 1.9;
+        margin-bottom: 15px;
+    }
+
+    .quick-action {
+        color: #426b50;
+        font-size: 13px;
+        font-weight: 800;
+    }
+
+        .quick-action span {
+            display: inline-block;
+            transition: transform .2s;
+        }
+
+    .quick-card:hover .quick-action span {
+        transform: translateX(-4px);
+    }
+
+    .info-panel {
+        display: grid;
+        grid-template-columns: 1.5fr 1fr;
+        gap: 18px;
+    }
+
+    .info-card {
+        background: #fff;
+        border: 1px solid #e8edf4;
+        border-radius: 16px;
+        padding: 25px;
+        box-shadow: 0 4px 15px rgba(30, 50, 80, .04);
+    }
+
+        .info-card h3 {
+            font-size: 16px;
+            font-weight: 800;
+            margin-bottom: 14px;
+        }
+
+        .info-card p {
+            font-size: 13px;
+            color: #778398;
+            line-height: 2.1;
+            margin: 0;
+        }
+
+    .feature-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            color: #526176;
+            padding: 9px 0;
+        }
+
+    .feature-check {
+        color: #369565;
+        font-weight: 800;
+    }
+
+    @@media (max-width: 768px) {
+        .welcome-section {
+            padding: 30px 23px;
+        }
+
+            .welcome-section h1 {
+                font-size: 23px;
+            }
+
+            .welcome-section::after {
+                font-size: 95px;
+                left: 15px;
+            }
+
+        .info-panel {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<div class="home-page">
+    <div class="home-container">
+
+        <section class="welcome-section">
+            <div class="welcome-content">
+                <div class="welcome-label">MAINTENANCE MANAGEMENT SYSTEM</div>
+
+                <h1>به سامانه مدیریت نگهداری و تعمیرات خوش آمدید</h1>
+
+                <p>
+                    بستری یکپارچه برای مدیریت تجهیزات، ثبت و پیگیری درخواست‌های تعمیراتی
+                    و سازمان‌دهی فرآیندهای نگهداری و تعمیرات.
+                </p>
+            </div>
+        </section>
+
+        <h2 class="section-title">دسترسی سریع</h2>
+
+        <div class="quick-links">
+
+            <a href="@Url.Action("Index", "Equipments")" class="quick-card">
+                <div class="quick-icon">⚙</div>
+                <h3>مدیریت تجهیزات</h3>
+                <p>
+                    مشاهده و مدیریت فهرست تجهیزات ثبت‌شده در سیستم.
+                </p>
+                <div class="quick-action">
+                    مشاهده تجهیزات <span>←</span>
+                </div>
+            </a>
+
+            <a href="@Url.Action("Active", "Equipments")" class="quick-card">
+                <div class="quick-icon">✓</div>
+                <h3>تجهیزات فعال</h3>
+                <p>
+                    دسترسی به فهرست تجهیزاتی که در حال حاضر فعال هستند.
+                </p>
+                <div class="quick-action">
+                    مشاهده تجهیزات فعال <span>←</span>
+                </div>
+            </a>
+
+            <a href="@Url.Action("Index", "MaintenanceRequests")" class="quick-card">
+                <div class="quick-icon">📋</div>
+                <h3>درخواست‌های تعمیرات</h3>
+                <p>
+                    مشاهده و پیگیری درخواست‌های ثبت‌شده تعمیراتی.
+                </p>
+                <div class="quick-action">
+                    مشاهده درخواست‌ها <span>←</span>
+                </div>
+            </a>
+
+        </div>
+
+        <h2 class="section-title">درباره سامانه</h2>
+
+        <div class="info-panel">
+
+            <div class="info-card">
+                <h3>مدیریت هوشمند فرآیندهای تعمیراتی</h3>
+                <p>
+                    این سامانه با هدف بهبود مدیریت فعالیت‌های نگهداری و تعمیرات،
+                    افزایش نظم در ثبت اطلاعات و تسهیل دسترسی به سوابق تجهیزات
+                    طراحی شده است. ساختار یکپارچه سامانه امکان مدیریت بهتر
+                    اطلاعات و پیگیری فرآیندهای تعمیراتی را فراهم می‌کند.
+                </p>
+            </div>
+
+            <div class="info-card">
+                <h3>قابلیت‌های سامانه</h3>
+
+                <ul class="feature-list">
+                    <li>
+                        <span class="feature-check">✓</span>
+                        مدیریت اطلاعات تجهیزات
+                    </li>
+                    <li>
+                        <span class="feature-check">✓</span>
+                        تفکیک تجهیزات فعال و غیرفعال
+                    </li>
+                    <li>
+                        <span class="feature-check">✓</span>
+                        مدیریت درخواست‌های تعمیراتی
+                    </li>
+                    <li>
+                        <span class="feature-check">✓</span>
+                        توسعه‌پذیری برای امکانات آینده
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
 </div>
+```

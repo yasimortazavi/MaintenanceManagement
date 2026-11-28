@@ -28,6 +28,11 @@ namespace Maintenance.Web.Controllers
 
             return View(equipment);
         }
+        public async Task<IActionResult> Active()
+        {
+            var equipments = await _equipmentService.GetActiveAsync();
 
+            return View(equipments);
+        }
     }
 }

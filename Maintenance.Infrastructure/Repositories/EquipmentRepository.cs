@@ -24,4 +24,12 @@ public class EquipmentRepository : IEquipmentRepository
         return await _context.Equipments
             .FirstOrDefaultAsync(e => e.Id == id);
     }
+
+    public async Task<List<Equipment>> GetActiveAsync()
+    {
+        return await _context.Equipments
+            .Where(e => e.IsActive)
+            .ToListAsync();
+    }
+
 }

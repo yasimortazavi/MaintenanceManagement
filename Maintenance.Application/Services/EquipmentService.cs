@@ -23,4 +23,10 @@ public class EquipmentService : IEquipmentService
         return await _equipmentRepository.GetByIdAsync(id);
     }
 
+    public Task<List<Equipment>> GetActiveAsync()
+    {
+        return _equipmentRepository.GetActiveAsync();
+    }
+
+
 }
