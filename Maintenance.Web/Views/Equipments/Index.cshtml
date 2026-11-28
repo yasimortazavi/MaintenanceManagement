@@ -1,4 +1,4 @@
-﻿@model List<Maintenance.Domain.Entities.Equipment>
+﻿@model Maintenance.Application.Models.PagedResult<Maintenance.Domain.Entities.Equipment>
 
 @{
     ViewData["Title"] = "مدیریت تجهیزات";
@@ -171,6 +171,55 @@
         color: #8994a7 !important;
     }
 
+    .pagination-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        padding: 20px 25px 25px;
+        border-top: 1px solid #edf0f5;
+        direction: rtl;
+        flex-wrap: wrap;
+    }
+
+    .page-link {
+        min-width: 36px;
+        height: 36px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 12px;
+        border-radius: 8px;
+        background: #f1f4f9;
+        color: #315887;
+        text-decoration: none;
+        font-size: 12px;
+        transition: .2s;
+    }
+
+        .page-link:hover {
+            background: #dfe8f4;
+        }
+
+        .page-link.current {
+            background: #203d66;
+            color: white;
+            font-weight: bold;
+        }
+
+        .page-link.disabled {
+            opacity: .4;
+            pointer-events: none;
+        }
+
+    .pagination-info {
+        width: 100%;
+        text-align: center;
+        color: #8994a7;
+        font-size: 11px;
+        margin-top: 8px;
+    }
+
     @@media(max-width: 650px) {
         .equipment-page {
             padding: 15px;
@@ -207,7 +256,7 @@
                 </div>
 
                 <div class="equipment-count">
-                    <strong>@(Model?.Count ?? 0)</strong>
+                    <strong>@Model.TotalCount</strong>
                     <span>تعداد کل تجهیزات</span>
                 </div>
             </div>
@@ -227,9 +276,9 @@
                     </thead>
 
                     <tbody>
-                        @if (Model != null && Model.Any())
+                        @if (Model.Items.Any())
                         {
-                            @foreach (var equipment in Model)
+                            @foreach (var equipment in Model.Items)
                             {
                                 <tr>
                                     <td class="equipment-id">@equipment.Id</td>
@@ -277,6 +326,39 @@
                     </tbody>
                 </table>
             </div>
+
+            @if (Model.TotalPages > 1)
+            {
+                <div class="pagination-container">
+
+                    <a asp-action="Index"
+                       asp-route-pageNumber="@(Model.PageNumber - 1)"
+                       class="page-link @(Model.PageNumber == 1 ? "disabled" : "")">
+                        قبلی
+                    </a>
+
+                    @for (int pageNumber = 1; pageNumber <= Model.TotalPages; pageNumber++)
+                    {
+                        <a asp-action="Index"
+                           asp-route-pageNumber="@pageNumber"
+                           class="page-link @(pageNumber == Model.PageNumber ? "current" : "")">
+                            @pageNumber
+                        </a>
+                    }
+
+                    <a asp-action="Index"
+                       asp-route-pageNumber="@(Model.PageNumber + 1)"
+                       class="page-link @(Model.PageNumber == Model.TotalPages ? "disabled" : "")">
+                        بعدی
+                    </a>
+
+                    <div class="pagination-info">
+                        صفحه @Model.PageNumber از @Model.TotalPages
+                        | تعداد کل تجهیزات: @Model.TotalCount
+                    </div>
+
+                </div>
+            }
 
         </div>
     </div>

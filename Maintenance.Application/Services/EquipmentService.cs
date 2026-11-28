@@ -1,5 +1,6 @@
 ﻿using Maintenance.Application.Interfaces.Repositories;
 using Maintenance.Application.Interfaces.Services;
+using Maintenance.Application.Models;
 using Maintenance.Domain.Entities;
 
 namespace Maintenance.Application.Services;
@@ -13,10 +14,16 @@ public class EquipmentService : IEquipmentService
         _equipmentRepository = equipmentRepository;
     }
 
-    public async Task<List<Equipment>> GetAllAsync()
+
+    public Task<PagedResult<Equipment>> GetAllAsync(
+        int pageNumber,
+        int pageSize)
     {
-        return await _equipmentRepository.GetAllAsync();
+        return _equipmentRepository.GetAllAsync(
+            pageNumber,
+            pageSize);
     }
+
 
     public async Task<Equipment?> GetByIdAsync(int id)
     {

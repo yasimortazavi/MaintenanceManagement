@@ -12,12 +12,32 @@ namespace Maintenance.Web.Controllers
             _equipmentService = equipmentService;
         }
 
-        public async Task<IActionResult> Index()
+
+  
+        public async Task<IActionResult> Index(int pageNumber = 1)
         {
-            var equipments = await _equipmentService.GetAllAsync();
+            if (pageNumber < 1)
+                pageNumber = 1;
+
+            int pageSize = 5;
+
+            var equipments = await _equipmentService.GetAllAsync(
+                pageNumber,
+                pageSize);
+
+            if (equipments.TotalPages > 0 &&
+                pageNumber > equipments.TotalPages)
+            {
+                pageNumber = equipments.TotalPages;
+
+                equipments = await _equipmentService.GetAllAsync(
+                    pageNumber,
+                    pageSize);
+            }
 
             return View(equipments);
         }
+
 
         public async Task<IActionResult> Details(int id)
         {
